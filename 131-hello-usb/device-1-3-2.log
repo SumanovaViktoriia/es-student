@@ -1,0 +1,18 @@
+задание: 1.3.2
+проект: 131-hello-usb
+устройство: 2e8a:000a
+серийный номер: E46320165B295726
+порт: COM3
+начало: 2026-09-30T22:42:39
+   0.880 <-- Hello, world!
+   1.880 <-- Hello, world!
+   2.880 <-- Hello, world!
+   3.880 <-- Hello, world!
+   4.880 <-- Hello, world!
+   5.880 <-- Hello, world!
+   6.880 <-- Hello, world!
+   7.880 <-- Hello, world!
+   8.880 <-- Hello, world!
+   9.880 <-- Hello, world!
+  10.880 <-- Hello, world!
+итог: принято строк 11 за 10.0 с

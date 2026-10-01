@@ -1,4 +1,4 @@
-# Проверка задания п2.2.2 на устройстве: посылает команды и записывает обмен.
+# Проверка задания п2.2.2 на устройстве.
 import time
 from datetime import datetime
 import serial
@@ -9,8 +9,16 @@ PRODUCT_ID = 0x000A
 TASK = "2.2.2"
 PROJECT = "221-command-time"
 LOG_NAME = "device-2-2-2.log"
-COMMANDS = ["uptime", "boot_info", "uptime", "boot_info", "uptime", "boot_info", "uptime", "boot_info"]
-ANSWER_TIMEOUT_S = 1
+STEPS = [
+    ("uptime", 1),
+    ("boot_info", 1),
+    ("uptime", 1),
+    ("boot_info", 1),
+    ("uptime", 1),
+    ("boot_info", 1),
+    ("uptime", 1),
+    ("boot_info", 1),
+]
 
 def find_board():
     for port in list_ports.comports():
@@ -20,21 +28,19 @@ def find_board():
 
 def talk(board):
     exchange = []
-    with serial.Serial(board.device, timeout=ANSWER_TIMEOUT_S) as port:
+    with serial.Serial(board.device, timeout=0.2) as port:
         time.sleep(0.2)
         port.reset_input_buffer()
         started = time.monotonic()
-        for command in COMMANDS:
+        for command, listen_s in STEPS:
             port.write((command + "\n").encode("ascii"))
             exchange.append((time.monotonic() - started, "-->", command))
-            print("--> " + command, end="\r\n")
-            time.sleep(0.4)
-            while True:
+            deadline = time.monotonic() + listen_s
+            while time.monotonic() < deadline:
                 line = port.readline().decode("ascii", "replace").strip()
-                if not line:
-                    break
-                exchange.append((time.monotonic() - started, "<--", line))
-                print("<-- " + line, end="\r\n")
+                if line:
+                    exchange.append((time.monotonic() - started, "<--", line))
+                    print(line, end="\r\n")
     return exchange
 
 def write_log(board, exchange):
@@ -47,13 +53,14 @@ def write_log(board, exchange):
         log.write("начало: " + datetime.now().isoformat(timespec="seconds") + "\n")
         for moment, direction, text in exchange:
             log.write("%8.3f %s %s\n" % (moment, direction, text))
-        log.write("итог: отправлено команд %d\n" % len(COMMANDS))
+        answers = len(exchange) - len(STEPS)
+        log.write("итог: отправлено команд %d, принято строк %d\n" % (len(STEPS), answers))
 
 board = find_board()
 if board is None:
     print("Плата не найдена. Проверьте кабель и запишите на плату прошивку задания.", end="\r\n")
 else:
-    print("Плата на порту " + board.device + ", посылаю команды", end="\r\n")
+    print("Плата на порту " + board.device + ", отправляю команды", end="\r\n")
     exchange = talk(board)
     write_log(board, exchange)
     print("Обмен записан в " + LOG_NAME, end="\r\n")

@@ -3,24 +3,24 @@
 устройство: 2e8a:000a
 серийный номер: 5303284730A0831C
 порт: COM4
-начало: 2026-10-01T15:45:28
+начало: 2026-10-01T15:59:04
    0.000 --> clk_info
    0.001 <-- clk_info
-   0.003 <-- dbg read_line:139 got clk_info
-   0.004 <-- signal     set_khz measured_khz
-   0.005 <-- clk_ref      12000        12001
-   0.007 <-- clk_sys     125000       125000
-   0.008 <-- clk_peri    125000       125000
-   0.009 <-- clk_usb      48000        48000
-   0.011 <-- clk_adc      48000        48000
-   0.012 <-- rosc             -         5294
-   2.016 --> info
-   2.017 <-- info
-   2.018 <-- dbg read_line:139 got info
-   2.019 <-- project: 221-command-time
-   2.021 <-- repo: https://github.com/mmariaaabdr/es-student
-   2.021 <-- board: pico
-   2.022 <-- serial: 5303284730A0831C
-   2.024 <-- chip: manufacturer 0x927, part 0x0002, revision 2
-   2.024 <-- pico-sdk: 2.3.0
-итог: отправлено команд 2
+   0.002 <-- dbg read_line:139 got clk_info
+   0.005 <-- signal     set_khz measured_khz
+   0.006 <-- clk_ref      12000        12001
+   0.008 <-- clk_sys     125000       125000
+   0.009 <-- clk_peri     48000        48000
+   0.011 <-- clk_usb      48000        48000
+   0.013 <-- clk_adc      48000        48000
+   0.015 <-- rosc             -         5296
+   2.083 --> info
+   2.083 <-- info
+   2.084 <-- dbg read_line:139 got info
+   2.085 <-- project: 221-command-time
+   2.087 <-- repo: https://github.com/mmariaaabdr/es-student
+   2.088 <-- board: pico
+   2.091 <-- serial: 5303284730A0831C
+   2.093 <-- chip: manufacturer 0x927, part 0x0002, revision 2
+   2.094 <-- pico-sdk: 2.3.0
+итог: отправлено команд 2, принято строк 17

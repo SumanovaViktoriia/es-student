@@ -1,4 +1,4 @@
-# Проверка задания п2.2.3 на устройстве: посылает команды и записывает обмен.
+# Проверка задания п2.1.3 на устройстве: посылает команды и записывает обмен.
 import time
 from datetime import datetime
 import serial
@@ -6,11 +6,11 @@ from serial.tools import list_ports
 
 VENDOR_ID = 0x2E8A
 PRODUCT_ID = 0x000A
-TASK = "2.2.3"
-PROJECT = "221-command-time"
-LOG_NAME = "device-2-2-3.log"
-COMMANDS = ["calc_pi", "uptime"]
-ANSWER_TIMEOUT_S = 10
+TASK = "2.1.3"
+PROJECT = "211-command-usb"
+LOG_NAME = "device-2-1-3.log"
+COMMANDS = ["mem_info"]
+ANSWER_TIMEOUT_S = 2
 
 def find_board():
     for port in list_ports.comports():
@@ -28,8 +28,6 @@ def talk(board):
             port.write((command + "\n").encode("ascii"))
             exchange.append((time.monotonic() - started, "-->", command))
             print("--> " + command, end="\r\n")
-            if command == "calc_pi":
-                time.sleep(1.0)
             while True:
                 line = port.readline().decode("ascii", "replace").strip()
                 if not line:

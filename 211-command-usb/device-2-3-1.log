@@ -1,0 +1,28 @@
+задание: 2.3.1
+проект: 231-command-args
+устройство: 2e8a:000a
+серийный номер: 5303284730A0831C
+порт: COM4
+начало: 2026-10-01T15:31:44
+   0.000 --> info
+   0.098 <-- info
+   0.098 <-- dbg read_line:121 got info
+   0.099 <-- project: 211-command-usb
+   0.100 <-- repo: https://github.com/mmariaaabdr/es-student
+   0.100 <-- board: pico
+   0.101 <-- serial: 5303284730A0831C
+   0.102 <-- chip: manufacturer 0x927, part 0x0002, revision 2
+   0.103 <-- pico-sdk: 2.3.0
+   2.106 --> version
+   2.259 <-- version
+   2.260 <-- dbg read_line:121 got version
+   2.262 <-- device: es-led-module 1.0.0, built Oct  1 2026 15:28:25, log level 3
+   4.265 --> clk_info
+   4.440 <-- clk_info
+   4.442 <-- dbg read_line:121 got clk_info
+   4.445 <-- err handle_command:102 unknown command: clk_info
+   6.450 --> uptime
+   6.580 <-- uptime
+   6.581 <-- dbg read_line:121 got uptime
+   6.583 <-- err handle_command:102 unknown command: uptime
+итог: отправлено команд 4

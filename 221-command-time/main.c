@@ -21,17 +21,6 @@ uint64_t last_toggle_us = 0;
 // 1 000 000 членов по 585 тактов при 125 МГц — около 4,7 с
 const uint CALC_PI_TERMS = 1000000;
 
-void blink(void)
-{
-    uint64_t now_us = time_us_64();
-
-    if (now_us - last_toggle_us >= BLINK_HALF_PERIOD_MS * 1000)
-    {
-        last_toggle_us = now_us;
-        led_toggle();
-    }
-}
-
 double calc_pi(uint terms)
 {
     double sum = 0.0;
@@ -56,6 +45,17 @@ void cmd_calc_pi(void)
 
     printf("pi: %.8f\n", pi_result);
     printf("time: %llu ms\n", spent_us / 1000);
+}
+
+void blink(void)
+{
+    uint64_t now_us = time_us_64();
+
+    if (now_us - last_toggle_us >= BLINK_HALF_PERIOD_MS * 1000)
+    {
+        last_toggle_us = now_us;
+        led_toggle();
+    }
 }
 
 void cmd_info(void)      { device_info(); }

@@ -1,14 +1,19 @@
-# Проверка задания п2.2.2 на устройстве.
+# Проверка задания п2.2.2 на устройстве: проверяет мигание светодиода
+# и ход часов uptime. Записывает обмен в файл device-2-2-2.log.
+
 import time
 from datetime import datetime
+
 import serial
 from serial.tools import list_ports
 
 VENDOR_ID = 0x2E8A
 PRODUCT_ID = 0x000A
+
 TASK = "2.2.2"
 PROJECT = "221-command-time"
 LOG_NAME = "device-2-2-2.log"
+# Команда и сколько секунд слушать плату, прежде чем отправить следующую
 STEPS = [
     ("uptime", 1),
     ("boot_info", 1),
@@ -20,11 +25,13 @@ STEPS = [
     ("boot_info", 1),
 ]
 
+
 def find_board():
     for port in list_ports.comports():
         if port.vid == VENDOR_ID and port.pid == PRODUCT_ID:
             return port
     return None
+
 
 def talk(board):
     exchange = []
@@ -43,6 +50,7 @@ def talk(board):
                     print(line, end="\r\n")
     return exchange
 
+
 def write_log(board, exchange):
     with open(LOG_NAME, "w", encoding="utf-8") as log:
         log.write("задание: " + TASK + "\n")
@@ -56,7 +64,9 @@ def write_log(board, exchange):
         answers = len(exchange) - len(STEPS)
         log.write("итог: отправлено команд %d, принято строк %d\n" % (len(STEPS), answers))
 
+
 board = find_board()
+
 if board is None:
     print("Плата не найдена. Проверьте кабель и запишите на плату прошивку задания.", end="\r\n")
 else:

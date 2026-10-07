@@ -15,14 +15,14 @@ PROJECT = "221-command-time"
 LOG_NAME = "device-2-2-2.log"
 # Команда и сколько секунд слушать плату, прежде чем отправить следующую
 STEPS = [
-    ("uptime", 1),
-    ("boot_info", 1),
-    ("uptime", 1),
-    ("boot_info", 1),
-    ("uptime", 1),
-    ("boot_info", 1),
-    ("uptime", 1),
-    ("boot_info", 1),
+    ("uptime", 0.8),
+    ("boot_info", 0.8),
+    ("uptime", 0.8),
+    ("boot_info", 0.8),
+    ("uptime", 0.8),
+    ("boot_info", 0.8),
+    ("uptime", 0.8),
+    ("boot_info", 0.8),
 ]
 
 

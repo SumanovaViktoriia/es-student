@@ -2,13 +2,14 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "pico/stdlib.h"
-#include "device.h"
-#include "log.h"
+#include "firmware.h"
+#include "device/device.h"
+#include "logging/log.h"
 #include "led-task.h"
 #include "button-task.h"
 #include "pi-task.h"
-#include "profiling.h"
+#include "profiling/profiling.h"
+#include "systime/systime.h"
 
 #define DEFAULT_PI_TERMS 1000000
 
@@ -42,8 +43,8 @@ static void cmd_info(const command_t *command)
 
     printf("name: %s\n", FIRMWARE_NAME);
     printf("version: %s\n", FIRMWARE_VERSION);
-    printf("project: %s\n", DEVICE_PROJECT);
-    printf("repo: %s\n", DEVICE_REPO);
+    printf("project: %s\n", FIRMWARE_PROJECT);
+    printf("repo: %s\n", FIRMWARE_REPO);
     printf("board: %s\n", info.board);
     printf("serial: %s\n", info.serial);
     printf("chip: manufacturer 0x%03x, part 0x%04x, revision %u\n",
@@ -54,7 +55,7 @@ static void cmd_info(const command_t *command)
 static void cmd_uptime(const command_t *command)
 {
     (void)command;
-    printf("uptime: %llu ms\n", time_us_64() / 1000);
+    printf("uptime: %llu ms\n", systime_ms());
 }
 
 static void cmd_pi(const command_t *command)
@@ -62,12 +63,8 @@ static void cmd_pi(const command_t *command)
     (void)command;
     switch (pi_task_get_state())
     {
-        case PI_STATE_NOT_STARTED:
-            printf("pi: not started\n");
-            break;
-        case PI_STATE_RUNNING:
-            printf("pi: running\n");
-            break;
+        case PI_STATE_NOT_STARTED: printf("pi: not started\n"); break;
+        case PI_STATE_RUNNING: printf("pi: running\n"); break;
         case PI_STATE_DONE:
             printf("pi: %.9f in %llu ms\n", pi_task_get_value(), pi_task_get_duration_ms());
             break;
@@ -93,14 +90,8 @@ static void cmd_pi_start(const command_t *command)
         }
     }
 
-    if (pi_task_start(terms))
-    {
-        printf("pi: started, %u terms\n", (unsigned)terms);
-    }
-    else
-    {
-        printf("error: pi is busy\n");
-    }
+    if (pi_task_start(terms)) printf("pi: started, %u terms\n", (unsigned)terms);
+    else printf("error: pi is busy\n");
 }
 
 static void cmd_led_enable(const command_t *command)
@@ -151,6 +142,7 @@ static void cmd_button(const command_t *command)
 static void cmd_profiling(const command_t *command)
 {
     (void)command;
+#if PROFILING_ENABLED
     for (uint32_t i = 0; i < PROFILING_MAX_STOPWATCHES; i++)
     {
         profiling_result_t result;
@@ -158,9 +150,12 @@ static void cmd_profiling(const command_t *command)
         {
             printf("%-10s count %-10u mean %u us  max %u us\n",
                    result.name, (unsigned)result.count,
-                   (unsigned)result.total_us, (unsigned)result.max_us);
+                   (unsigned)result.mean_us, (unsigned)result.max_us);
         }
     }
+#else
+    printf("profiling is disabled in this build\n");
+#endif
 }
 
 static void cmd_profiling_reset(const command_t *command)

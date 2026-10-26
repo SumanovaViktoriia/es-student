@@ -1,12 +1,15 @@
 #include <stdio.h>
 #include "pico/stdlib.h"
-#include "log.h"
-#include "device.h"
+#include "firmware.h"
+#include "logging/log.h"
+#include "device/device.h"
+#include "stdio-text-protocol/stdio-text-protocol.h"
 #include "api.h"
 #include "led-task.h"
 #include "button-task.h"
 #include "pi-task.h"
-#include "profiling.h"
+#include "profiling/profiling.h"
+#include "systime/systime.h"
 
 typedef enum {
     STOPWATCH_LOOP,
@@ -38,10 +41,7 @@ int main(void)
 
         profiling_start(STOPWATCH_COMMAND);
         const command_t *command = stdio_text_protocol_handle();
-        if (command != NULL)
-        {
-            api_handle(command);
-        }
+        if (command != NULL) api_handle(command);
         profiling_stop(STOPWATCH_COMMAND);
 
         profiling_start(STOPWATCH_LED);

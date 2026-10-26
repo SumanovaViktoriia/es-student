@@ -1,3 +1,4 @@
+#include <stddef.h>
 #include "pi-task.h"
 #include "systime/systime.h"
 
@@ -18,7 +19,10 @@ void pi_task_init(void)
 
 bool pi_task_start(uint32_t terms)
 {
-    if (pi_state == PI_STATE_RUNNING) return false;
+    if (pi_state == PI_STATE_RUNNING)
+    {
+        return false;
+    }
 
     pi_state = PI_STATE_RUNNING;
     pi_sum = 0.0;
@@ -33,11 +37,21 @@ bool pi_task_start(uint32_t terms)
 
 void pi_task_handle(void)
 {
-    if (pi_state != PI_STATE_RUNNING) return;
+    if (pi_state != PI_STATE_RUNNING)
+    {
+        return;
+    }
 
     uint32_t end = pi_k + PI_TERMS_PER_CALL;
-    if (end < pi_k) end = pi_terms_total;
-    if (end > pi_terms_total) end = pi_terms_total;
+    
+    if (end < pi_k)
+    {
+        end = pi_terms_total;
+    }
+    if (end > pi_terms_total)
+    {
+        end = pi_terms_total;
+    }
 
     for (uint32_t i = pi_k; i < end; i++)
     {
@@ -58,6 +72,26 @@ pi_state_t pi_task_get_state(void)
     return pi_state;
 }
 
+bool pi_task_get_result(double *value, uint64_t *duration_ms)
+{
+    if (pi_state != PI_STATE_DONE)
+    {
+        return false;
+    }
+
+    if (value != NULL)
+    {
+        *value = pi_sum * 4.0;
+    }
+
+    if (duration_ms != NULL)
+    {
+        *duration_ms = (pi_end_us - pi_start_us) / 1000;
+    }
+
+    return true;
+}
+
 double pi_task_get_value(void)
 {
     return pi_sum * 4.0;
@@ -65,8 +99,14 @@ double pi_task_get_value(void)
 
 uint64_t pi_task_get_duration_ms(void)
 {
-    if (pi_state == PI_STATE_NOT_STARTED) return 0;
-    if (pi_state == PI_STATE_RUNNING) return (systime_us() - pi_start_us) / 1000;
+    if (pi_state == PI_STATE_NOT_STARTED)
+    {
+        return 0;
+    }
+    if (pi_state == PI_STATE_RUNNING)
+    {
+        return (systime_us() - pi_start_us) / 1000;
+    }
     return (pi_end_us - pi_start_us) / 1000;
 }
 

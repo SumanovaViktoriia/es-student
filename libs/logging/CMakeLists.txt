@@ -5,7 +5,3 @@ add_library(logging STATIC
 target_include_directories(logging PUBLIC
     include
 )
-
-target_link_libraries(logging PRIVATE
-    pico_stdlib
-)

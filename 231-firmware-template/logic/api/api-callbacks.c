@@ -1,13 +1,12 @@
-#include "api.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "api-commands.h"
 #include "firmware.h"
 #include "device/device.h"
-#include "logging/log.h"
-#include "led-task.h"
-#include "button-task.h"
-#include "pi-task.h"
+#include "led-task/led-task.h"
+#include "button-task/button-task.h"
+#include "pi-task/pi-task.h"
 #include "profiling/profiling.h"
 #include "systime/systime.h"
 
@@ -165,13 +164,7 @@ static void cmd_profiling_reset(const command_t *command)
     printf("profiling reset\n");
 }
 
-typedef struct {
-    const char *name;
-    const char *help;
-    void (*callback)(const command_t *);
-} api_command_t;
-
-static const api_command_t commands[] = {
+const api_command_t api_commands[] = {
     {"info", "device passport", cmd_info},
     {"uptime", "time since reset", cmd_uptime},
     {"pi", "show pi status or result", cmd_pi},
@@ -185,34 +178,4 @@ static const api_command_t commands[] = {
     {"profiling_reset", "reset profiling results", cmd_profiling_reset},
 };
 
-#define COMMAND_COUNT (sizeof(commands) / sizeof(commands[0]))
-
-void api_handle(const command_t *command)
-{
-    if (command->truncated)
-    {
-        printf("error: command longer than 63 characters or 4 arguments\n");
-        return;
-    }
-
-    if (strcmp(command->name, "help") == 0)
-    {
-        printf("help             list of commands\n");
-        for (uint32_t i = 0; i < COMMAND_COUNT; i++)
-        {
-            printf("%-16s %s\n", commands[i].name, commands[i].help);
-        }
-        return;
-    }
-
-    for (uint32_t i = 0; i < COMMAND_COUNT; i++)
-    {
-        if (strcmp(command->name, commands[i].name) == 0)
-        {
-            commands[i].callback(command);
-            return;
-        }
-    }
-
-    printf("error: unknown command '%s', try help\n", command->name);
-}
+const uint32_t api_command_count = sizeof(api_commands) / sizeof(api_commands[0]);

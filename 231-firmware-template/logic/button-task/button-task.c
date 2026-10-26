@@ -1,9 +1,8 @@
-#include "button-task.h"
-#include "pico/stdlib.h"
-#include "led-task.h"
+#include <stddef.h>
+#include "button-task/button-task.h"
+#include "platform/platform.h"
 #include "systime/systime.h"
 
-#define BUTTON_PIN 15
 #define DEBOUNCE_TIME_US 20000
 
 typedef enum {
@@ -16,21 +15,19 @@ typedef enum {
 static button_state_t button_state = BUTTON_STATE_RELEASED;
 static uint64_t state_change_time_us = 0;
 static uint32_t press_count = 0;
+static button_task_callback_t on_press_callback = NULL;
 
-void button_task_init(void)
+void button_task_init(button_task_callback_t on_press)
 {
-    gpio_init(BUTTON_PIN);
-    gpio_set_dir(BUTTON_PIN, GPIO_IN);
-    gpio_pull_up(BUTTON_PIN);
-    
     button_state = BUTTON_STATE_RELEASED;
     state_change_time_us = systime_us();
     press_count = 0;
+    on_press_callback = on_press;
 }
 
 void button_task_handle(void)
 {
-    bool pressed = !gpio_get(BUTTON_PIN);
+    bool pressed = platform_button_read();
     uint64_t now_us = systime_us();
 
     switch (button_state)
@@ -51,7 +48,10 @@ void button_task_handle(void)
             else if (now_us - state_change_time_us >= DEBOUNCE_TIME_US)
             {
                 press_count++;
-                led_task_next_state();
+                if (on_press_callback != NULL)
+                {
+                    on_press_callback();
+                }
                 button_state = BUTTON_STATE_PRESSED;
             }
             break;

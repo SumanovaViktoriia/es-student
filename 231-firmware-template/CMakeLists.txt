@@ -13,34 +13,62 @@ add_compile_options(-Wall)
 
 add_subdirectory(../libs ${CMAKE_BINARY_DIR}/libs)
 
-add_executable(${PROJECT_NAME}
-    ${CMAKE_CURRENT_SOURCE_DIR}/main.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/api/api.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/led-task/led-task.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/button-task/button-task.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/pi-task/pi-task.c
+# --- Железо прибора ---
+add_library(platform STATIC
+    platform/platform.c
 )
 
-target_include_directories(${PROJECT_NAME} PRIVATE
+target_include_directories(platform PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
-    ${CMAKE_CURRENT_SOURCE_DIR}/api
-    ${CMAKE_CURRENT_SOURCE_DIR}/led-task
-    ${CMAKE_CURRENT_SOURCE_DIR}/button-task
-    ${CMAKE_CURRENT_SOURCE_DIR}/pi-task
 )
 
-target_link_libraries(${PROJECT_NAME}
+target_link_libraries(platform PRIVATE
     pico_stdlib
-    pico_unique_id
+)
+
+target_compile_definitions(platform PRIVATE
+    DEVICE_BOARD="${PICO_BOARD}"
+)
+
+# --- Логика прибора ---
+add_library(logic STATIC
+    logic/api/api.c
+    logic/api/api-callbacks.c
+    logic/led-task/led-task.c
+    logic/button-task/button-task.c
+    logic/pi-task/pi-task.c
+)
+
+target_include_directories(logic PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/logic
+    ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+target_link_libraries(logic PRIVATE
     device
     logging
     profiling
     systime
+    platform
+)
+
+target_link_libraries(logic PUBLIC
     stdio_text_protocol
 )
 
-target_compile_definitions(${PROJECT_NAME} PRIVATE
-    DEVICE_BOARD="${PICO_BOARD}"
+add_executable(${PROJECT_NAME}
+    main.c
+)
+
+target_link_libraries(${PROJECT_NAME}
+    pico_stdlib
+    platform
+    logic
+    logging
+    device
+    profiling
+    systime
+    stdio_text_protocol
 )
 
 target_compile_definitions(profiling PUBLIC

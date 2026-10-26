@@ -1,5 +1,5 @@
+#include "pi-task/pi-task.h"
 #include <stddef.h>
-#include "pi-task.h"
 #include "systime/systime.h"
 
 #define PI_TERMS_PER_CALL 100

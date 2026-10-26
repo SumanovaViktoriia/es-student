@@ -1,5 +1,5 @@
-#include <stddef.h>
 #include "button-task/button-task.h"
+#include <stddef.h>
 #include "platform/platform.h"
 #include "systime/systime.h"
 

@@ -21,14 +21,14 @@
    0.563 <-- pi               get pi calculation status or result
    1.500 --> info
    1.563 <-- info
-   1.563 <-- name: es-led-module
-   1.563 <-- version: 1.2.0
-   1.563 <-- project: 231-firmware-template
-   1.563 <-- repo: https://github.com/anahitkhachoyan/es-student
-   1.563 <-- board: pico
-   1.563 <-- serial: E663682593365138
-   1.563 <-- chip: manufacturer 0x927, part 0x0002, revision 2
-   1.563 <-- pico-sdk: 2.3.0
+   name: es-firmware-template
+	version: 2.0.0
+	project: 231-firmware-template
+	repo: https://github.com/mmariaaabdr/es-student
+	board: pico
+	serial: 5303284730A0831C
+	chip: manufacturer 0x927, part 0x0002, revision 2
+	pico-sdk: 2.3.0
    2.516 --> uptime
    2.578 <-- uptime
    2.578 <-- uptime: 14734 ms

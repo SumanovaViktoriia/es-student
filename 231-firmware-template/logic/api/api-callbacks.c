@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "api-commands.h"
+#include "api.h"
 #include "firmware.h"
 #include "device/device.h"
 #include "led-task/led-task.h"
@@ -9,6 +10,7 @@
 #include "pi-task/pi-task.h"
 #include "profiling/profiling.h"
 #include "systime/systime.h"
+#include "platform/platform.h"
 
 #define DEFAULT_PI_TERMS 1000000
 
@@ -82,9 +84,14 @@ static void cmd_pi_start(const command_t *command)
 
     if (command->argc == 1)
     {
-        if (!parse_u32(command->argv[0], &terms) || terms == 0)
+        if (!parse_u32(command->argv[0], &terms))
         {
             printf("error: usage pi_start [terms]\n");
+            return;
+        }
+        if (terms == 0)
+        {
+            printf("error: terms must be greater than 0\n");
             return;
         }
     }
@@ -122,7 +129,12 @@ static void cmd_led_period(const command_t *command)
         return;
     }
     uint32_t period = 0;
-    if (!parse_u32(command->argv[0], &period) || period == 0)
+    if (!parse_u32(command->argv[0], &period))
+    {
+        printf("error: usage led_period [period_ms]\n");
+        return;
+    }
+    if (period == 0)
     {
         printf("error: period_ms must be greater than 0\n");
         return;
@@ -134,8 +146,12 @@ static void cmd_led_period(const command_t *command)
 static void cmd_button(const command_t *command)
 {
     (void)command;
-    const char *state_str = button_task_is_pressed() ? "pressed" : "released";
-    printf("button: %s, presses %u\n", state_str, (unsigned)button_task_get_press_count());
+    printf("button 1: %s, presses %u\n",
+           button_task_is_pressed(PLATFORM_BUTTON_1) ? "pressed" : "released",
+           (unsigned)button_task_get_press_count(PLATFORM_BUTTON_1));
+    printf("button 2: %s, presses %u\n",
+           button_task_is_pressed(PLATFORM_BUTTON_2) ? "pressed" : "released",
+           (unsigned)button_task_get_press_count(PLATFORM_BUTTON_2));
 }
 
 static void cmd_profiling(const command_t *command)

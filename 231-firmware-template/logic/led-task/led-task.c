@@ -71,3 +71,14 @@ void led_task_next_state(void)
         case LED_STATE_BLINK: led_task_set_state(LED_STATE_OFF);   break;
     }
 }
+
+void led_task_next_period(void)
+{
+    switch (led_period_ms)
+    {
+        case 250:  led_period_ms = 500;  break;
+        case 500:  led_period_ms = 1000; break;
+        case 1000: led_period_ms = 250;  break;
+        default:   led_period_ms = 500;  break;
+    }
+}

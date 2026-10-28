@@ -2,7 +2,8 @@
 #include "pico/stdlib.h"
 
 #define LED_PIN 25
-#define BUTTON_PIN 15
+#define BUTTON_1_PIN 15
+#define BUTTON_2_PIN 14
 
 void platform_init(void)
 {
@@ -11,9 +12,13 @@ void platform_init(void)
     gpio_init(LED_PIN);
     gpio_set_dir(LED_PIN, GPIO_OUT);
 
-    gpio_init(BUTTON_PIN);
-    gpio_set_dir(BUTTON_PIN, GPIO_IN);
-    gpio_pull_up(BUTTON_PIN);
+    gpio_init(BUTTON_1_PIN);
+    gpio_set_dir(BUTTON_1_PIN, GPIO_IN);
+    gpio_pull_up(BUTTON_1_PIN);
+
+    gpio_init(BUTTON_2_PIN);
+    gpio_set_dir(BUTTON_2_PIN, GPIO_IN);
+    gpio_pull_up(BUTTON_2_PIN);
 }
 
 void platform_led_set(bool on)
@@ -21,7 +26,12 @@ void platform_led_set(bool on)
     gpio_put(LED_PIN, on);
 }
 
-bool platform_button_read(void)
+bool platform_button_read(platform_button_t button)
 {
-    return !gpio_get(BUTTON_PIN);
+    switch (button)
+    {
+        case PLATFORM_BUTTON_1: return !gpio_get(BUTTON_1_PIN);
+        case PLATFORM_BUTTON_2: return !gpio_get(BUTTON_2_PIN);
+        default: return false;
+    }
 }

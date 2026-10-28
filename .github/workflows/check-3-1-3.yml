@@ -1,0 +1,10 @@
+name: 3.1.3 Телеметрия измерений
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  check:
+    uses: ant-lab-ru/es-test/.github/workflows/check-3-1-3.yml@master
+    secrets:
+      ES_ACCOUNT_SECRET: ${{ secrets.ES_ACCOUNT_SECRET }}

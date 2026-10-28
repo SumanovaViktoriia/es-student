@@ -123,13 +123,8 @@ static void cmd_led_blink(const command_t *command)
 
 static void cmd_led_period(const command_t *command)
 {
-    if (command->argc != 1)
-    {
-        printf("error: usage led_period [period_ms]\n");
-        return;
-    }
     uint32_t period = 0;
-    if (!parse_u32(command->argv[0], &period))
+    if (command->argc != 1 || !parse_u32(command->argv[0], &period))
     {
         printf("error: usage led_period [period_ms]\n");
         return;

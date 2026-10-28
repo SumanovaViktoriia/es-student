@@ -141,12 +141,9 @@ static void cmd_led_period(const command_t *command)
 static void cmd_button(const command_t *command)
 {
     (void)command;
-    printf("button 1: %s, presses %u\n",
+    printf("button: %s, presses %u\n",
            button_task_is_pressed(PLATFORM_BUTTON_1) ? "pressed" : "released",
            (unsigned)button_task_get_press_count(PLATFORM_BUTTON_1));
-    printf("button 2: %s, presses %u\n",
-           button_task_is_pressed(PLATFORM_BUTTON_2) ? "pressed" : "released",
-           (unsigned)button_task_get_press_count(PLATFORM_BUTTON_2));
 }
 
 static void cmd_profiling(const command_t *command)

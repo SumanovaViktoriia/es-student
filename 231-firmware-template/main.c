@@ -33,7 +33,6 @@ int main(void)
     pi_task_init();
 
     button_task_init(PLATFORM_BUTTON_1, led_task_next_state);
-    button_task_init(PLATFORM_BUTTON_2, led_task_next_period);
 
     while (1)
     {

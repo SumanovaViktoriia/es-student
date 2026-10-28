@@ -4,7 +4,6 @@
 
 typedef enum {
     PLATFORM_BUTTON_1,
-    PLATFORM_BUTTON_2,
     PLATFORM_BUTTON_COUNT
 } platform_button_t;
 

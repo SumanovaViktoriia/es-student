@@ -1,5 +1,5 @@
-# Приёмка прибора 231-firmware-template по техническому заданию занятия 2.3:
-# отправляет плате кадры команд по приложениям А и Б и записывает обмен в файл device-2-3-8.log.
+# Задание 3.1.1: спрашивает у платы справку, паспорт и трижды напряжение на входе АЦП,
+# записывает обмен в файл device-3-1-1.log.
 
 import time
 from datetime import datetime
@@ -10,49 +10,18 @@ from serial.tools import list_ports
 VENDOR_ID = 0x2E8A
 PRODUCT_ID = 0x000A
 
-TASK = "2.3.8"
-PROJECT = "231-firmware-template"
-LOG_NAME = "device-2-3-8.log"
+TASK = "3.1.1"
+PROJECT = "311-adc"
+LOG_NAME = "device-3-1-1.log"
 BACKSPACE = "\x7f"
-# Кадр, который отправляется плате как есть, и сколько секунд слушать ответ.
-# Кадр без конца строки плата принимает, но не выполняет: его продолжение идёт следующим шагом.
+# Кадр команды и сколько секунд слушать ответ.
 STEPS = [
     ("\r", 0.5),
     ("help\r", 1),
     ("info\r", 1),
-    ("uptime\r", 1),
-    ("   uptime    \r", 1),
-    ("upx" + BACKSPACE + "time\r", 1),
-    ("x" * 70 + "\r", 1),
-    ("led_period 1 2 3 4 5\r", 1),
-    ("blink\r", 1),
-    ("led_enable\r", 1),
-    ("led_disable\r", 1),
-    ("led_period 2000\r", 1),
-    ("led_blink\r", 1),
-    ("led_period\r", 1),
-    ("led_period 5x\r", 1),
-    ("led_period -1\r", 1),
-    ("led_period 4294967296\r", 1),
-    ("led_period 0\r", 1),
-    ("led_period 1000\r", 1),
-    ("button\r", 1),
-    ("pi\r", 1),
-    ("pi_start 0\r", 1),
-    ("pi_start 5x\r", 1),
-    ("pi_start 10 20\r", 1),
-    ("profiling_reset\r", 1),
-    ("pi_start\r", 0.5),
-    ("pi\r", 0.5),
-    ("pi_start 1000\r", 0.5),
-    ("uptime\r", 0.5),
-    ("p", 6),
-    ("i\r", 1),
-    ("profiling\r", 1),
-    ("pi_start 100000\r", 1),
-    ("pi\r", 1),
-    ("profiling_reset\r", 1),
-    ("profiling\r", 1),
+    ("get_voltage\r", 1),
+    ("get_voltage\r", 1),
+    ("get_voltage\r", 1),
 ]
 
 

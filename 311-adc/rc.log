@@ -1,0 +1,8 @@
+R_kohm = 10
+C_uf = 100
+tau_expected_s = 1.000
+tau_min_s = 0.760
+tau_max_s = 1.260
+tau_charge_s = 0.010
+tau_discharge_s = none
+result = fail

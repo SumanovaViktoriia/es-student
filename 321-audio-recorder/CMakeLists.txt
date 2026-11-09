@@ -5,7 +5,7 @@ set(PICO_PLATFORM rp2040)
 
 include(pico_sdk_import.cmake)
 
-project(311_adc)
+project(321_audio_recorder)
 
 pico_sdk_init()
 

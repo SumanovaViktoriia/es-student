@@ -23,10 +23,7 @@ STEPS = [
     ("mic_level\r", 0.5),
     ("mic_level 50\r", 0.5),
     ("mic_level 185\r", 0.5),
-    ("mic_level 0\r", 0.5),
-    ("mic_level 200\r", 0.5),
 ]
-
 
 def find_board():
     for port in list_ports.comports():

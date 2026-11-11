@@ -14,7 +14,6 @@ TASK = "3.2.7"
 PROJECT = "321-audio-recorder"
 LOG_NAME = "device-3-2-7.log"
 BACKSPACE = "\x7f"
-# Кадр команды и сколько секунд слушать ответ.
 STEPS = [
     ("\r", 0.5),
     ("help\r", 1),
@@ -23,6 +22,8 @@ STEPS = [
     ("mic_level\r", 0.5),
     ("mic_level 50\r", 0.5),
     ("mic_level 185\r", 0.5),
+    ("mic_level 0\r", 0.5),
+    ("mic_level 200\r", 0.5),
 ]
 
 def find_board():

@@ -3,28 +3,51 @@
 устройство: 2e8a:000a
 серийный номер: 5303284730A0831C
 порт: COM4
-начало: 2026-10-28T16:09:46
+начало: 2026-11-11T16:34:27
    0.000 --> 
-   0.543 --> info
-   0.606 <-- info
-   0.606 <-- name: es-adc
-   0.606 <-- version: 1.0.0
-   0.607 <-- project: 311-adc
-   0.607 <-- repo: https://github.com/mmariaaabdr/es-student
-   0.607 <-- board: pico
-   0.607 <-- serial: 5303284730A0831C
-   0.608 <-- chip: manufacturer 0x927, part 0x0002, revision 2
-   0.609 <-- pico-sdk: 2.3.0
-   1.553 --> get_temp
-   1.615 <-- get_temp
-   1.615 <-- temp: 37.9 C
-   2.554 --> get_temp
-   2.617 <-- get_temp
-   2.617 <-- temp: 37.9 C
-   3.555 --> get_temp
-   3.616 <-- get_temp
-   3.616 <-- temp: 37.4 C
-   4.608 --> get_voltage
-   4.670 <-- get_voltage
-   4.672 <-- voltage: 0.986 V
-итог: отправлено кадров 6, принято строк 17
+   0.504 --> info
+   0.566 <-- info
+   0.572 <-- name: es-adc
+   0.573 <-- version: 1.0.0
+   0.573 <-- project: 311-adc
+   0.573 <-- repo: https://github.com/mmariaaabdr/es-student
+   0.573 <-- board: pico
+   0.573 <-- serial: 5303284730A0831C
+   0.573 <-- chip: manufacturer 0x927, part 0x0002, revision 2
+   0.574 <-- pico-sdk: 2.3.0
+   1.510 --> help
+   1.512 <-- help
+   1.512 <-- help             list of commands
+   1.513 <-- info             device passport
+   1.513 <-- uptime           time since reset
+   1.513 <-- pi               show pi status or result
+   1.513 <-- pi_start         start pi calculation: pi_start [terms]
+   1.513 <-- led_enable       turn LED on
+   1.514 <-- led_disable      turn LED off
+   1.515 <-- led_blink        blink LED
+   1.515 <-- led_period       set LED period: led_period [ms]
+   1.515 <-- button           button state and press count
+   1.515 <-- profiling        show profiling results
+   1.515 <-- profiling_reset  reset profiling results
+   1.572 <-- get_voltage      voltage on GP26, ADC input 0
+   1.573 <-- get_temp         chip temperature, degrees Celsius
+   1.573 <-- tm_start         start telemetry: tm_start [period_ms]
+   1.574 <-- tm_stop          stop telemetry
+   1.574 <-- charge_on        start charging RC circuit
+   1.574 <-- charge_off       stop charging RC circuit
+   2.511 --> uptime
+   2.573 <-- uptime
+   2.573 <-- uptime: 277854 ms
+   3.575 --> get_temp
+   3.639 <-- get_temp
+   3.639 <-- temp: 39.3 C
+   4.576 --> get_temp
+   4.640 <-- get_temp
+   4.643 <-- temp: 39.3 C
+   5.638 --> get_temp
+   5.700 <-- get_temp
+   5.700 <-- temp: 39.8 C
+   6.639 --> get_voltage
+   6.703 <-- get_voltage
+   6.703 <-- voltage: 0.593 V
+итог: отправлено кадров 8, принято строк 38

@@ -50,7 +50,7 @@
    1.684 <-- pico-sdk: 2.3.0
    2.635 --> mic_bias
    2.698 <-- mic_bias
-   2.761 <-- mic: bias 1.25 V
+   2.761 <-- mic: bias 1.244 V
    3.145 --> mic_level
    3.208 <-- mic_level
    3.272 <-- mic: level 11.0 mV rms, peak 282.8 mV, 100 ms

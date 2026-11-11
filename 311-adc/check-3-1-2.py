@@ -18,6 +18,8 @@ BACKSPACE = "\x7f"
 STEPS = [
     ("\r", 0.5),
     ("info\r", 1),
+    ("help\r", 1),
+    ("uptime\r", 1),
     ("get_temp\r", 1),
     ("get_temp\r", 1),
     ("get_temp\r", 1),

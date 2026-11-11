@@ -1,0 +1,72 @@
+задание: 3.2.3
+проект: 321-audio-recorder
+устройство: 2e8a:000a
+серийный номер: 5303284730A0831C
+порт: COM4
+начало: 2026-11-11T15:38:19
+   0.001 --> 
+   0.506 --> help
+   0.507 <-- help
+   0.508 <-- help             list of commands
+   0.509 <-- info             device passport
+   0.510 <-- uptime           time since reset
+   0.510 <-- pi               show pi status or result
+   0.514 <-- pi_start         start pi calculation: pi_start [terms]
+   0.515 <-- led_enable       turn LED on
+   0.517 <-- led_disable      turn LED off
+   0.518 <-- led_blink        blink LED
+   0.520 <-- led_period       set LED period: led_period [ms]
+   0.520 <-- button           button state and press count
+   0.520 <-- profiling        show profiling results
+   0.521 <-- profiling_reset  reset profiling results
+   0.521 <-- get_voltage      voltage on GP26, ADC input 0
+   0.521 <-- get_temp         chip temperature, degrees Celsius
+   0.521 <-- charge_on        start charging RC circuit
+   0.522 <-- charge_off       stop charging RC circuit
+   0.522 <-- timer_blink_start blink led by timer: timer_blink_start <period_ms>
+   0.522 <-- timer_blink_stop stop timer blink, number of toggles
+   0.524 <-- cap_start        start ADC capture: cap_start <N> <period_us>
+   0.527 <-- cap_dump         dump capture results
+   0.527 <-- dma_cap          capture block via DMA: dma_cap <N>
+   0.528 <-- tm_start         start telemetry: tm_start [period_ms]
+   0.529 <-- tm_stop          stop telemetry
+   0.531 <-- stream_start     start stream: stream_start [8|16]
+   0.532 <-- stream_stop      stop stream
+   0.534 <-- generate_tone    generate tone: generate_tone <Hz>
+   0.536 <-- wdt_enable       enable watchdog: wdt_enable <timeout_ms>
+   0.538 <-- reset_reason     last reset reason
+   0.600 <-- hang             hang the superloop
+   0.601 <-- mic_bias         microphone bias
+   0.601 <-- mic_level        microphone level: mic_level [ms]
+   1.554 --> info
+   1.617 <-- info
+   1.617 <-- name: es-recorder
+   1.618 <-- version: 1.0.0
+   1.618 <-- project: 321-audio-recorder
+   1.618 <-- repo: https://github.com/mmariaaabdr/es-student
+   1.618 <-- board: pico
+   1.618 <-- serial: 5303284730A0831C
+   1.618 <-- chip: manufacturer 0x927, part 0x0002, revision 2
+   1.618 <-- pico-sdk: 2.3.0
+   2.568 --> dma_cap 1000
+   2.632 <-- dma_cap 1000
+   2.633 <-- dma_cap: 1000 samples in 22696 us, expected 22675 us, min 735 max 949 mean 940.2
+   3.074 --> dma_cap 4410
+   3.138 <-- dma_cap 4410
+   3.201 <-- dma_cap: 4410 samples in 100002 us, expected 100000 us, min 665 max 949 mean 941.6
+   3.583 --> dma_cap 8192
+   3.646 <-- dma_cap 8192
+   3.774 <-- dma_cap: 8192 samples in 185761 us, expected 185759 us, min 658 max 949 mean 942.1
+   4.089 --> uptime
+   4.152 <-- uptime
+   4.153 <-- uptime: 76615 ms
+   4.597 --> dma_cap 0
+   4.660 <-- dma_cap 0
+   4.662 <-- error: N must be 1..8192
+   5.104 --> dma_cap 9000
+   5.167 <-- dma_cap 9000
+   5.167 <-- error: N must be 1..8192
+   5.611 --> dma_cap
+   5.675 <-- dma_cap
+   5.675 <-- error: usage dma_cap <N>
+итог: отправлено кадров 10, принято строк 55

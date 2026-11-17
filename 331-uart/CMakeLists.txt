@@ -13,7 +13,6 @@ add_compile_options(-Wall)
 
 add_subdirectory(../libs ${CMAKE_BINARY_DIR}/libs)
 
-# --- Железо прибора ---
 add_library(platform STATIC
     platform/platform.c
 )
@@ -25,13 +24,15 @@ target_include_directories(platform PUBLIC
 target_link_libraries(platform PRIVATE
     pico_stdlib
     hardware_adc
+    hardware_uart
+    hardware_irq
+    hardware_dma
 )
 
 target_compile_definitions(platform PRIVATE
     DEVICE_BOARD="${PICO_BOARD}"
 )
 
-# --- Логика прибора ---
 add_library(logic STATIC
     logic/api/api.c
     logic/api/api-callbacks.c
@@ -39,6 +40,8 @@ add_library(logic STATIC
     logic/button-task/button-task.c
     logic/pi-task/pi-task.c
     logic/edge-task/edge-task.c
+    logic/uart-task/uart-task.c
+    logic/block-task/block-task.c
 )
 
 target_include_directories(logic PUBLIC

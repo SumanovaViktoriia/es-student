@@ -1,0 +1,68 @@
+задание: 3.3.2
+проект: 331-uart
+устройство: 2e8a:000a
+серийный номер: 5303284730A0831C
+порт: COM4
+начало: 2026-11-17T20:18:48
+   0.000 --> 
+   0.562 --> help
+   0.563 <-- help
+   0.565 <-- help             list of commands
+   0.565 <-- info             device passport
+   0.566 <-- uptime           time since reset
+   0.567 <-- pi               show pi status or result
+   0.567 <-- pi_start         start pi calculation: pi_start [terms]
+   0.569 <-- led_enable       turn LED on
+   0.569 <-- led_disable      turn LED off
+   0.571 <-- led_blink        blink LED
+   0.571 <-- led_period       set LED period: led_period [ms]
+   0.573 <-- button           button state and press count
+   0.573 <-- profiling        show profiling results
+   0.575 <-- profiling_reset  reset profiling results
+   0.575 <-- edge             rise and fall of the RC line: edge pp|od
+   0.576 <-- loop             UART0 loopback: loop internal|pins
+   0.576 <-- echo             text through UART0 and back: echo <text>
+   0.576 <-- link             text from UART0 to UART1 and back: link <text>
+   0.641 <-- baud_shift       shift UART1 baud rate: baud_shift <percent>
+   0.641 <-- text             32 characters from UART1 to UART0
+   0.642 <-- parity           parity of UART0 and UART1: parity <rx> <tx>
+   0.642 <-- block            64 bytes from UART1 to UART0: block irq|poll
+   0.643 <-- scope            UART0 line on ADC: scope <baud> <text>
+   1.592 --> info
+   1.654 <-- info
+   1.655 <-- name: es-uart
+   1.655 <-- version: 1.0.0
+   1.656 <-- project: 331-uart
+   1.657 <-- repo: https://github.com/mmariaaabdr/es-student
+   1.659 <-- board: pico
+   1.660 <-- serial: 5303284730A0831C
+   1.661 <-- chip: manufacturer 0x927, part 0x0002, revision 2
+   1.662 <-- pico-sdk: 2.3.0
+   2.608 --> loop internal
+   2.671 <-- loop internal
+   2.671 <-- loop: internal
+   3.114 --> echo ping
+   3.177 <-- echo ping
+   3.177 <-- rx: ping err: none
+   3.621 --> echo 0123456789ABCDEFGHIJKLMNOPQRSTUV
+   3.685 <-- echo 0123456789ABCDEFGHIJKLMNOPQRSTUV
+   3.685 <-- rx: 0123456789ABCDEFGHIJKLMNOPQRSTUV err: none
+   4.129 --> loop pins
+   4.192 <-- loop pins
+   4.193 <-- loop: pins
+   4.637 --> echo ping
+   4.701 <-- echo ping
+   4.702 <-- rx:  err: none
+   5.146 --> echo 0123456789ABCDEFGHIJKLMNOPQRSTUV
+   5.209 <-- echo 0123456789ABCDEFGHIJKLMNOPQRSTUV
+   5.210 <-- rx:  err: none
+   5.651 --> echo 0123456789ABCDEFGHIJKLMNOPQRSTUVW
+   5.715 <-- echo 0123456789ABCDEFGHIJKLMNOPQRSTUVW
+   5.716 <-- error: text longer than 32
+   6.160 --> echo
+   6.223 <-- echo
+   6.224 <-- error: usage echo <text>
+   6.666 --> loop xx
+   6.730 <-- loop xx
+   6.731 <-- error: usage loop internal|pins
+итог: отправлено кадров 12, принято строк 49
